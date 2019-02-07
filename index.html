@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="css/onsenui.css">
+	<link rel="stylesheet" type="text/css" href="css/onsen-css-components.css">
+	<script src="js/onsenui.min.js"></script>
+	<title>Booking App</title>
+</head>
+<body>
+	<ons-splitter>
+	  <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
+	    <ons-page>
+	      <ons-list>
+	        <ons-list-item onclick="fn.load('home.html')" tappable>
+	          Beranda
+	        </ons-list-item>
+	        <ons-list-item onclick="fn.load('crud1.html')" tappable>
+	          Kamar
+	        </ons-list-item>
+	        <ons-list-item onclick="fn.load('crud2.html')" tappable>
+	          Sewa
+	        </ons-list-item>
+	        <ons-list-item onclick="" tappable>
+	          Exit
+	        </ons-list-item>
+	      </ons-list>
+	    </ons-page>
+	  </ons-splitter-side>
+	  <ons-splitter-content id="content" page="home.html"></ons-splitter-content>
+	</ons-splitter>
+
+	<template id="home.html">
+	  <ons-page>
+	    <ons-toolbar>
+	      <div class="left">
+	        <ons-toolbar-button onclick="fn.open()">
+	          <ons-icon icon="md-menu"></ons-icon>
+	        </ons-toolbar-button>
+	      </div>
+	      <div class="center">
+	        Main
+	      </div>
+	    </ons-toolbar>
+	    <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
+	      Diisi bebas
+	    </p>
+	  </ons-page>
+	</template>
+
+	<template id="crud1.html">
+	  <ons-page>
+	    <ons-toolbar>
+	      <div class="left">
+	        <ons-toolbar-button onclick="fn.open()">
+	          <ons-icon icon="md-menu"></ons-icon>
+	        </ons-toolbar-button>
+	      </div>
+	      <div class="center">
+	        CRUD 1
+	      </div>
+	    </ons-toolbar>
+	    
+      	<div style="height: 200px; padding: 1px 0 0 0;">
+		  <div class="card card--material">
+		    <div class="card__title card--material__title">Form Kamar</div>
+		    <div class="card__content card--material__content">
+		    	<span>
+		    		<form id="form-kamar">
+				  <div><input class="text-input text-input--material" placeholder="Nama Kamar" type="text" id="nama" required></div>
+				  <br />
+				  <div><input class="text-input text-input--material" placeholder="Harga Per Kamar" type="text" id="harga" required></div>
+				  <br/>
+				  <button class="button button--material" onclick="addKamar()">Simpan</button>
+				  </form>
+				</span>
+		    </div>
+		  </div>
+
+		  <div class="card card--material">
+		    <div class="card__title card--material__title">Data</div>
+		    <div class="card__content card--material__content">
+		    	<ul class="list list--material" id="dataKamar">
+				  
+				  <li class="list-item list-item--material">
+				    <p>Data Kosong</p>
+				  </li>
+				</ul>
+		    </div>
+		  </div>
+		</div>
+	   <script type="text/javascript">
+	   	ons.ready(function() {
+	   		getKamar();
+	   	});
+	   </script>
+	  </ons-page>
+	</template>
+
+	<template id="crud2.html">
+	  <ons-page>
+	    <ons-toolbar>
+	      <div class="left">
+	        <ons-toolbar-button onclick="fn.open()">
+	          <ons-icon icon="md-menu"></ons-icon>
+	        </ons-toolbar-button>
+	      </div>
+	      <div class="center">
+	        CRUD 2
+	      </div>
+	    </ons-toolbar>
+
+	    <div style="height: 200px; padding: 1px 0 0 0;">
+		  	<div class="card card--material">
+			    <div class="card__title card--material__title">Form Sewa</div>
+			    <div class="card__content card--material__content">
+			    	<span>
+			    		<form id=form-sewa>
+					  <div><input class="text-input text-input--material" placeholder="Tanggal checkin" id="tanggal" type="date" required></div>
+					  <br />
+					  <div><select class="select-input" id="id_kamar">
+					  	<option>Pilih</option>
+					  </select></div>
+					  <br/>
+					  <div><input class="text-input text-input--material" placeholder="Lama Sewa" type="number" id="lama" required></div>
+					  <br/>
+					  <button class="button button--material" onclick="addSewa()">Simpan</button>
+					  </form>
+					</span>
+			    </div>
+		  	</div>
+
+		    <div class="card card--material">
+			    <div class="card__title card--material__title">Data</div>
+			    <div class="card__content card--material__content">
+			    	<ul class="list list--material" id="dataSewa">
+					  <li class="list-item list-item--material">
+					    <p>Data Kosong</p>
+					  </li>
+					  
+					</ul>
+			    </div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			ons.ready(function() {
+	   		selectKamar();
+	   		getSewa();
+	   	});
+		</script>
+	  </ons-page>
+	</template>
+
+	<script type="text/javascript">
+		window.fn = {};
+
+		window.fn.open = function() {
+			var menu = document.getElementById('menu');
+			menu.open();
+		};
+
+		window.fn.load = function(page) {
+			var content = document.getElementById('content');
+			var menu = document.getElementById('menu');
+			content.load(page)
+			.then(menu.close.bind(menu));
+		};
+	</script>
+	<script src="js/main.js"></script>
+
+</body>
+</html>
